@@ -1,7 +1,27 @@
+import { useState, useRef, useEffect, FormEvent } from "react";
+
 function Home() {
+  const [handle, setHandle] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    console.log("Submitted yay!", handle);
+  }
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
   return (
-    <div>
-      <h1>Auto deployment test</h1>
+    <div style={{ margin: "auto", maxWidth: "500px" }}>
+      <h1>Find out person's best tweets!</h1>
+      <form onSubmit={handleSubmit}>
+        <input value={handle} onChange={(e) => setHandle(e.target.value)} ref={inputRef} />
+        <button type="submit">Search</button>
+      </form>
     </div>
   );
 }
