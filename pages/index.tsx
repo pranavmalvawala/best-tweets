@@ -4,9 +4,15 @@ function Home() {
   const [handle, setHandle] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log("Submitted yay!", handle);
+    try {
+      const res = await fetch(`/api/tweets?handle=${handle}`);
+      const data = await res.json();
+      console.log("data: ", data);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   useEffect(() => {
