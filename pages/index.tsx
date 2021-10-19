@@ -7,13 +7,22 @@ function Home() {
   const [handle, setHandle] = useState<string>("pranavmalvawala");
   const [isLoading, setLoading] = useState<boolean>(false);
   const [allTweets, setAllTweets] = useState<TweetProps>({} as TweetProps);
+  const [error, setError] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
       setLoading(true);
+      setError(false);
+      setAllTweets({} as TweetProps);
       const res = await fetch(`/api/tweets?handle=${handle}`);
+
+      if (!res.ok) {
+        setError(true);
+        return;
+      }
+
       const data = await res.json();
       setAllTweets(data);
     } catch (err) {
@@ -57,6 +66,7 @@ function Home() {
         </HStack>
       </form>
       {allTweets.tweets?.length > 0 && <Tweets {...allTweets} />}
+      {error ? <Text style={{ marginTop: "3rem" }}>Please check the handle!</Text> : null}
     </Layout>
   );
 }
