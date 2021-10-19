@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, FormEvent } from "react";
 
 function Home() {
-  const [handle, setHandle] = useState<string>("");
+  const [handle, setHandle] = useState<string>("pranavmalvawala");
   const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
