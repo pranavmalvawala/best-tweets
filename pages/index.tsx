@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect, FormEvent } from "react";
+import { Input, Box } from "@chakra-ui/react";
+import Layout from "../components/Layout";
 
 function Home() {
-  const [handle, setHandle] = useState<string>("pranavmalvawala");
+  const [handle, setHandle] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -22,13 +24,19 @@ function Home() {
   }, []);
 
   return (
-    <div style={{ margin: "auto", maxWidth: "500px" }}>
+    <Layout>
       <h1>Find out person's best tweets!</h1>
       <form onSubmit={handleSubmit}>
-        <input value={handle} onChange={(e) => setHandle(e.target.value)} ref={inputRef} />
+        <Input
+          value={handle}
+          placeholder="pranavmalvawala"
+          onChange={(e) => setHandle(e.target.value)}
+          ref={inputRef}
+          colorScheme="twitter"
+        />
         <button type="submit">Search</button>
       </form>
-    </div>
+    </Layout>
   );
 }
 
