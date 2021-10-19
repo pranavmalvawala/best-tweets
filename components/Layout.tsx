@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Flex, Spacer, Box, Center } from "@chakra-ui/react";
+import { Flex, Spacer, Box, Center, VStack } from "@chakra-ui/react";
 import Toggle from "./Toggle";
 import Footer from "./Footer";
 
@@ -18,7 +18,9 @@ export default function Layout({ children }: Props) {
         <Spacer />
         <Toggle />
       </Flex>
-      <Center>{children}</Center>
+      <VStack marginBottom="8" marginTop="100px">
+        {children}
+      </VStack>
       <Center>
         <Footer />
       </Center>
