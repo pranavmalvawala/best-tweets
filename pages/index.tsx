@@ -4,7 +4,7 @@ import Layout from "../components/Layout";
 import Tweets, { Props as TweetProps } from "../components/Tweets";
 
 function Home() {
-  const [handle, setHandle] = useState<string>("pranavmalvawala");
+  const [handle, setHandle] = useState<string>("");
   const [isLoading, setLoading] = useState<boolean>(false);
   const [allTweets, setAllTweets] = useState<TweetProps>({} as TweetProps);
   const [error, setError] = useState<boolean>(false);
