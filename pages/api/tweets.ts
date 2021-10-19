@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { StatusCodes } from "http-status-codes";
-import TwitterApi, { TweetV2, UserV2Result } from "twitter-api-v2";
+import TwitterApi, { TweetV2, UserV2 } from "twitter-api-v2";
 
 type Tweets = {
   tweets: TweetV2[];
-  user: UserV2Result;
+  user: UserV2;
 };
 
 const client = new TwitterApi(process.env.BEARER_TOKEN || "").readOnly;
@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       exclude: ["replies", "retweets"],
     });
 
-    res.status(StatusCodes.OK).json({ tweets: tweets.data.data, user });
+    res.status(StatusCodes.OK).json({ tweets: tweets.data.data, user: user.data });
   } catch (err: any) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: err.message });
   }

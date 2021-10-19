@@ -21,7 +21,7 @@ export default function Layout({ children }: Props) {
       <VStack marginBottom="8" marginTop="100px">
         {children}
       </VStack>
-      <Center>
+      <Center marginBottom="10">
         <Footer />
       </Center>
     </Box>

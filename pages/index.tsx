@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect, FormEvent } from "react";
 import { Heading, Image, HStack, Text, FormControl, Input, FormHelperText, Button } from "@chakra-ui/react";
 import Layout from "../components/Layout";
+import Tweets, { Props as TweetProps } from "../components/Tweets";
 
 function Home() {
-  const [handle, setHandle] = useState<string>("");
+  const [handle, setHandle] = useState<string>("pranavmalvawala");
   const [isLoading, setLoading] = useState<boolean>(false);
+  const [allTweets, setAllTweets] = useState<TweetProps>({} as TweetProps);
   const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -13,7 +15,7 @@ function Home() {
       setLoading(true);
       const res = await fetch(`/api/tweets?handle=${handle}`);
       const data = await res.json();
-      console.log("data: ", data);
+      setAllTweets(data);
     } catch (err) {
       console.log(err);
     } finally {
@@ -54,6 +56,7 @@ function Home() {
           </Button>
         </HStack>
       </form>
+      {allTweets.tweets?.length > 0 && <Tweets {...allTweets} />}
     </Layout>
   );
 }
